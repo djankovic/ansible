@@ -1,0 +1,46 @@
+---
+- hosts: all
+  vars_files:
+    - ../vars/_bsd.yml
+  tasks:
+    - name: Configure SSH
+      notify: restart_sshd
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        line: "{{item}}"
+        state: present
+      with_items:
+        - "Port {{ssh.port}}"
+        - "KbdInteractiveAuthentication no"
+        - "PermitRootLogin without-password"
+    - name: Install software packages
+      package:
+        name:
+          - tmux
+          - mosh
+          - zsh
+          - vim
+          - htop
+          - doas
+          - git-tiny
+        state: present
+    - name: Create administrative users
+      user:
+        name: "{{user.name}}"
+        groups:
+          - wheel
+        shell: /usr/local/bin/zsh
+        state: present
+    - name: Set administrative SSH key
+      ansible.posix.authorized_key:
+        user: "{{user.name}}"
+        key: "{{user.pubkey}}"
+        state: present
+  handlers:
+    - listen: restart_sshd
+      service:
+        name: sshd
+        state: restarted
+    - listen: restart_sshd
+      set_fact:
+        ansible_port: "{{ssh.port}}"

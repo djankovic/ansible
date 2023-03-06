@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "ops"
+version = "0.1.0"
+description = ""
+authors = ["Dom J <6401646+djankovic@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+ansible = "^7.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

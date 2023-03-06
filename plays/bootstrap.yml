@@ -1,0 +1,10 @@
+---
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: Update system
+      raw: "env PAGER=/bin/cat /usr/sbin/freebsd-update --not-running-from-cron fetch install"
+    - name: Ensure Python 3 is installed
+      raw: "which python3 || pkg install -y python3"
+    - name: Reboot
+      raw: "shutdown -r +1s"
