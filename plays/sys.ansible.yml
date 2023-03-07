@@ -25,7 +25,7 @@
       ansible.builtin.package:
         name:
           - git-tiny
-          - vim-tiny
+          - editors/neovim
           - net/mosh
           - sysutils/htop
           - sysutils/tmux
