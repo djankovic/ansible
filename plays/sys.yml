@@ -4,12 +4,10 @@
     - ../vars/_bsd.yml
   remote_user: root
   tasks:
-    # Backporting FreeBSD 14's default shell
-    # (/bin/sh) to the current RELEASE (13).
-    - name: Configure root shell
+    - name: Default root shell
       user: 
         name: root
-        shell: /bin/sh
+        shell: /bin/tcsh
     - name: Configure SSH
       notify: restart_sshd
       lineinfile:
