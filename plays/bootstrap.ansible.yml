@@ -1,13 +1,18 @@
 ---
-- hosts: all
+- name: "System bootstrapping"
+  hosts: all
   gather_facts: false
   remote_user: root
   tasks:
     - name: Update system
-      raw: "env PAGER=/bin/cat /usr/sbin/freebsd-update --not-running-from-cron fetch install"
+      ansible.builtin.raw: "env PAGER=/bin/cat /usr/sbin/freebsd-update --not-running-from-cron fetch install"
+      changed_when: true
     - name: Ensure Python 3 is installed
-      raw: "which python3 || pkg install -y python3"
+      ansible.builtin.raw: "which python3 || pkg install -y python3"
+      changed_when: true
     - name: Unset zroot mountpoint
-      raw: "zfs set mountpoint=none zroot && rmdir /zroot"
+      ansible.builtin.raw: "zfs set mountpoint=none zroot && rmdir /zroot"
+      changed_when: true
     - name: Reboot
-      raw: "shutdown -r +1s"
+      ansible.builtin.raw: "shutdown -r +1s"
+      changed_when: true

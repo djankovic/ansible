@@ -1,22 +1,26 @@
 ---
-- hosts: all
+- name: "User-specific configuration"
+  hosts: all
   vars_files:
-    - ../vars/_bsd.yml
+    - vars/_bsd.yml
   remote_user: "{{user.name}}"
   tasks:
     - name: Create .hushlogin
-      copy:
-        src: ../files/hushlogin
+      ansible.builtin.copy:
+        src: hushlogin
         dest: ~/.hushlogin
+        mode: "644"
     - name: Create ZIMHOME
-      file:
+      ansible.builtin.file:
         path: ~/.zim
         state: directory
+        mode: "755"
     - name: Set up ZSH with Zim
-      copy:
-        src: "{{item.src}}"
-        dest: "{{item.dest}}"
+      ansible.builtin.copy:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
         force: true
+        mode: "644"
       with_items:
         - { src: "../files/zimfw.zsh", dest: "~/.zim/zimfw.zsh" }
         - { src: "../files/zimrc", dest: "~/.zimrc" }

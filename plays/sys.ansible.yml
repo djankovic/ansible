@@ -1,27 +1,28 @@
 ---
-- hosts: all
+- name: "System-wide configuration"
+  hosts: all
   vars_files:
-    - ../vars/_bsd.yml
+    - vars/_bsd.yml
   remote_user: root
   tasks:
     - name: Default root shell
-      user: 
+      ansible.builtin.user:
         name: root
         shell: /bin/tcsh
     - name: Configure SSH
       notify: restart_sshd
-      lineinfile:
+      ansible.builtin.lineinfile:
         path: /etc/ssh/sshd_config
-        line: "{{item}}"
+        line: "{{ item }}"
         state: present
       with_items:
-        - "Port {{ssh.port}}"
+        - "Port {{ ssh.port }}"
         - "PermitRootLogin prohibit-password"
         - "PasswordAuthentication no"
         - "KbdInteractiveAuthentication no"
         - "AllowAgentForwarding yes"
     - name: Install software
-      package:
+      ansible.builtin.package:
         name:
           - git-tiny
           - vim-tiny
@@ -35,27 +36,30 @@
           - textproc/bat
         state: present
     - name: Configure doas
-      copy: 
-        src: "../files/doas.conf"
+      ansible.builtin.copy:
+        src: "doas.conf"
         dest: "/usr/local/etc/doas.conf"
         force: true
+        mode: "644"
     - name: Create administrative users
-      user:
-        name: "{{user.name}}"
+      ansible.builtin.user:
+        name: "{{ user.name }}"
         groups:
           - wheel
         shell: /usr/local/bin/zsh
         state: present
     - name: Set administrative SSH key
       ansible.posix.authorized_key:
-        user: "{{user.name}}"
-        key: "{{user.pubkey}}"
+        user: "{{ user.name }}"
+        key: "{{ user.pubkey }}"
         state: present
   handlers:
-    - listen: restart_sshd
-      service:
+    - name: "Restart sshd"
+      listen: restart_sshd
+      ansible.builtin.service:
         name: sshd
         state: restarted
-    - listen: restart_sshd
-      set_fact:
-        ansible_ssh_port: "{{ssh.port}}"
+    - name: "Change Ansible SSH port"
+      listen: restart_sshd
+      ansible.builtin.set_fact:
+        ansible_ssh_port: "{{ ssh.port }}"
