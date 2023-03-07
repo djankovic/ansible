@@ -1,0 +1,16 @@
+# Default behaviours
+zmodule environment
+zmodule input
+zmodule utility
+
+# Prompt
+zmodule git-info
+zmodule asciiship
+
+# Tools
+zmodule magic-enter
+zmodule agkozak/zsh-z
+zmodule fzf
+
+# Load last
+zmodule completion

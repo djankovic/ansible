@@ -1,0 +1,19 @@
+# :-)
+[ -x /usr/bin/fortune ] && /usr/bin/fortune freebsd-tips
+
+# Extra autocompletions (overridable by Zim)
+[ -f /usr/local/share/examples/fzf/shell/completion.zsh ] && \
+  source /usr/local/share/examples/fzf/shell/completion.zsh
+
+# Extra key bindings (overridable by Zim)
+[ -f /usr/local/share/examples/fzf/shell/key-bindings.zsh ] && \
+  source /usr/local/share/examples/fzf/shell/key-bindings.zsh
+
+# Initialize Zim
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+[[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]] && source ${ZIM_HOME}/zimfw.zsh init -q
+source ${ZIM_HOME}/init.zsh
+
+# Aliases
+alias sudo=doas
+alias dig=drill

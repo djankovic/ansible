@@ -1,0 +1,19 @@
+---
+- hosts: all
+  vars_files:
+    - ../vars/_bsd.yml
+  remote_user: "{{user.name}}"
+  tasks:
+    - name: Create ZIMHOME
+      file:
+        path: ~/.zim
+        state: directory
+    - name: Set up ZSH with Zim
+      copy:
+        src: "{{item.src}}"
+        dest: "{{item.dest}}"
+        force: true
+      with_items:
+        - { src: "../files/zimfw.zsh", dest: "~/.zim/zimfw.zsh" }
+        - { src: "../files/zimrc", dest: "~/.zimrc" }
+        - { src: "../files/zshrc", dest: "~/.zshrc" }
