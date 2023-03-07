@@ -2,7 +2,14 @@
 - hosts: all
   vars_files:
     - ../vars/_bsd.yml
+  remote_user: root
   tasks:
+    # Backporting FreeBSD 14's default shell
+    # (/bin/sh) to the current RELEASE (13).
+    - name: Configure root shell
+      user: 
+        name: root
+        shell: /bin/sh
     - name: Configure SSH
       notify: restart_sshd
       lineinfile:
@@ -11,19 +18,29 @@
         state: present
       with_items:
         - "Port {{ssh.port}}"
+        - "PermitRootLogin prohibit-password"
+        - "PasswordAuthentication no"
         - "KbdInteractiveAuthentication no"
-        - "PermitRootLogin without-password"
-    - name: Install software packages
+        - "AllowAgentForwarding yes"
+    - name: Install software
       package:
         name:
-          - tmux
-          - mosh
-          - zsh
-          - vim
-          - htop
-          - doas
           - git-tiny
+          - editors/vim
+          - net/mosh
+          - sysutils/htop
+          - sysutils/tmux
+          - security/doas
+          - shells/zsh
+          - textproc/fzf
+          - textproc/ripgrep
+          - textproc/bat
         state: present
+    - name: Configure doas
+      copy: 
+        src: "../files/doas.conf"
+        dest: "/usr/local/etc/doas.conf"
+        force: true
     - name: Create administrative users
       user:
         name: "{{user.name}}"
@@ -43,4 +60,4 @@
         state: restarted
     - listen: restart_sshd
       set_fact:
-        ansible_port: "{{ssh.port}}"
+        ansible_ssh_port: "{{ssh.port}}"

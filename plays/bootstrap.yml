@@ -1,6 +1,7 @@
 ---
 - hosts: all
   gather_facts: false
+  remote_user: root
   tasks:
     - name: Update system
       raw: "env PAGER=/bin/cat /usr/sbin/freebsd-update --not-running-from-cron fetch install"
