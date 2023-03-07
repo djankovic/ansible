@@ -35,6 +35,18 @@
           - textproc/ripgrep
           - textproc/bat
         state: present
+    - name: Set up root's ZSH switching
+      ansible.builtin.lineinfile:
+        path: /root/.cshrc
+        insertafter: 'if \(\$\?prompt\) then'
+        line: "\t[ -x /usr/local/bin/zsh ] && exec /usr/local/bin/zsh"
+        state: present
+    - name: Set up root's .zshrc
+      ansible.builtin.copy:
+        src: "zshrc_root"
+        dest: "/root/.zshrc"
+        force: true
+        mode: "644"
     - name: Configure doas
       ansible.builtin.copy:
         src: "doas.conf"
