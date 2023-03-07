@@ -4,6 +4,10 @@
     - ../vars/_bsd.yml
   remote_user: "{{user.name}}"
   tasks:
+    - name: Create .hushlogin
+      copy:
+        src: ../files/hushlogin
+        dest: ~/.hushlogin
     - name: Create ZIMHOME
       file:
         path: ~/.zim
