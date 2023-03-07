@@ -26,7 +26,7 @@
       package:
         name:
           - git-tiny
-          - editors/vim
+          - vim-tiny
           - net/mosh
           - sysutils/htop
           - sysutils/tmux
