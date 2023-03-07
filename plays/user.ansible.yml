@@ -22,6 +22,6 @@
         force: true
         mode: "644"
       with_items:
-        - { src: "../files/zimfw.zsh", dest: "~/.zim/zimfw.zsh" }
-        - { src: "../files/zimrc", dest: "~/.zimrc" }
-        - { src: "../files/zshrc", dest: "~/.zshrc" }
+        - { src: "zimfw.zsh", dest: "~/.zim/zimfw.zsh" }
+        - { src: "zimrc", dest: "~/.zimrc" }
+        - { src: "zshrc_user", dest: "~/.zshrc" }
