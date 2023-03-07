@@ -51,11 +51,6 @@
         user: "{{user.name}}"
         key: "{{user.pubkey}}"
         state: present
-    - name: Install default jail.conf
-      copy:
-        src: "../files/jail.conf"
-        dest: "/etc/jail.conf"
-        force: true
   handlers:
     - listen: restart_sshd
       service:
