@@ -2,7 +2,7 @@ bindkey -e
 autoload -Uz compinit
 compinit
 
-PROMPT="%F{red}%n@%m%f %1~ %# "
+PROMPT="%F{red}%n@%m%f %~ %# "
 HISTFILE=${ZDOTDIR:-${HOME}}/.zhistory
 HISTSIZE=100000
 SAVEHIST=100000
