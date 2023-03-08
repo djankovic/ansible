@@ -25,3 +25,4 @@
         - { src: "zimfw.zsh", dest: "~/.zim/zimfw.zsh" }
         - { src: "zimrc", dest: "~/.zimrc" }
         - { src: "zshrc_user", dest: "~/.zshrc" }
+        - { src: "tmux.conf", dest: "~/.tmux.conf" }

@@ -19,3 +19,23 @@ alias sudo=doas
 alias dig=drill
 alias vim=nvim
 alias ll="ls -Albhp"
+
+# Poor man's byobu-enable
+if [[ $- =~ i ]] && [[ -z "$TMUX" ]] && [[ -n "$SSH_TTY" ]]; then
+  tmux attach-session -t ssh_tmux || tmux new-session -s ssh_tmux
+  logout
+fi
+
+function _delete_or_detach() {
+  if [[ -n "${BUFFER}" ]]; then
+    zle delete-char-or-list
+  else
+    tmux detach-client
+  fi
+}
+
+if [[ -n "$TMUX" ]]; then
+  setopt IGNORE_EOF
+  zle -N _delete_or_detach
+  bindkey "^D" _delete_or_detach
+fi
