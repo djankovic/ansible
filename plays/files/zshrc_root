@@ -1,3 +1,5 @@
+export CLICOLOR=1
+
 bindkey -e
 autoload -Uz compinit
 compinit
