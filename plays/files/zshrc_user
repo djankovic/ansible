@@ -9,6 +9,9 @@
 [ -f /usr/local/share/examples/fzf/shell/key-bindings.zsh ] && \
   source /usr/local/share/examples/fzf/shell/key-bindings.zsh
 
+# Vars and zstyles
+WORDCHARS=${WORDCHARS//[\/]}
+
 # Initialize Zim
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]] && source ${ZIM_HOME}/zimfw.zsh init -q
