@@ -21,6 +21,7 @@
         - "PasswordAuthentication no"
         - "KbdInteractiveAuthentication no"
         - "AllowAgentForwarding yes"
+        - "UseDNS no"
     - name: Install software
       ansible.builtin.package:
         name:
