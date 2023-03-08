@@ -6,9 +6,10 @@ authors = ["Dom J <6401646+djankovic@users.noreply.github.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
-ansible = "^7.3.0"
-ansible-lint = { version = "^6.14.0", markers = "platform_system != 'Windows'" }
+python = "~3.11"
+ansible-core = "~2.12"
+ansible-lint = { version = "~6.14.0", markers = "platform_system != 'Windows'" }
+mitogen = "~0.3.3"
 
 
 [build-system]
