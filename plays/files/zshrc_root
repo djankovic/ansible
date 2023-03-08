@@ -16,3 +16,6 @@ setopt HIST_VERIFY
 setopt SHARE_HISTORY
 setopt INTERACTIVE_COMMENTS
 setopt NO_CLOBBER
+
+alias vim=nvim
+alias ll="ls -Albhp"

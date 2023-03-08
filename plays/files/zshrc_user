@@ -17,3 +17,5 @@ source ${ZIM_HOME}/init.zsh
 # Aliases
 alias sudo=doas
 alias dig=drill
+alias vim=nvim
+alias ll="ls -Albhp"
