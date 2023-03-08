@@ -27,6 +27,7 @@
           - git-tiny
           - editors/neovim
           - net/mosh
+          - net/rsync
           - sysutils/htop
           - sysutils/tmux
           - security/doas
