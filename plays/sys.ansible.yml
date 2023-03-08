@@ -29,6 +29,7 @@
           - editors/neovim
           - net/mosh
           - net/rsync
+          - sysutils/fd
           - sysutils/htop
           - sysutils/tmux
           - security/doas
