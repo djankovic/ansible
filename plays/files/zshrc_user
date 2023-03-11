@@ -11,6 +11,9 @@
 
 # Vars and zstyles
 WORDCHARS=${WORDCHARS//[\/]}
+zstyle :prompt:pure:host color 'default'
+zstyle :prompt:pure:user color 'default'
+zstyle :prompt:pure:git:action color 'red'
 
 # Initialize Zim
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim

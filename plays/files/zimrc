@@ -4,8 +4,7 @@ zmodule input
 zmodule utility
 
 # Prompt
-zmodule git-info
-zmodule asciiship
+zmodule sindresorhus/pure --source async.zsh --source pure.zsh
 
 # Tools
 zmodule magic-enter
