@@ -68,6 +68,16 @@
         user: "{{ user.name }}"
         key: "{{ user.pubkey }}"
         state: present
+    - name: Print log level and priority (syslogd)
+      ansible.builtin.lineinfile:
+        path: /etc/rc.conf
+        line: 'syslogd_flags="-ss -v -v"'
+        state: present
+    - name: Disable sendmail
+      ansible.builtin.lineinfile:
+        path: /etc/rc.conf
+        line: 'sendmail_enable="NONE"'
+        state: present
   handlers:
     - name: "Restart sshd"
       listen: restart_sshd
